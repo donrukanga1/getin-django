@@ -1,0 +1,12 @@
+ansible==1.9.4
+Django==1.9
+django-model-utils==2.4
+django-rest-swagger==0.3.4
+djangorestframework==3.3.1
+ecdsa==0.13
+Jinja2==2.8
+MarkupSafe==0.23
+paramiko==1.16.0
+pycrypto==2.6.1
+PyYAML==3.11
+underwear==0.4.5
