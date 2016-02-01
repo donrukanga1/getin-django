@@ -19,3 +19,4 @@ class ListSerializer(serializers.ModelSerializer):
 class RegisterGirlsSerializer(serializers.ModelSerializer):
     class Meta:
         model = PregnantGirl
+        fields = ('name', 'marital_status', 'education_level', 'date_of_birth')
