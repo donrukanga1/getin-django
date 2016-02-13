@@ -48,7 +48,12 @@ class BlastSmsView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         for girl in PregnantGirl.objects.all():
-            sms = utils.send_sms(girl.contact_number, form.data['text'])
+
+            if girl.contact_number[0] == '0':
+                phone_number = '256' + girl.contact_number[1:]
+            else:
+                phone_number = girl.contact_number
+
+            utils.gateway.sendMessage(phone_number, form.data['text'])
 
         return super(BlastSmsView, self).form_valid(form)
-
