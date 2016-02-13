@@ -1,0 +1,12 @@
+---
+- apt: update_cache=yes cache_valid_time=3600
+
+- name: Installing openjdk
+  apt: name=install openjdk-7-jdk state=present
+
+- command: mkdir /usr/java
+
+- command: ln -s /usr/lib/jvm/java-7-openjdk-amd64 /usr/java/default
+
+- name: Installing Solr
+  apt: name=solr-tomcat state=present

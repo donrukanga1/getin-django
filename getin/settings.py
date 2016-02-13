@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'backend',
     'rest_framework',
+    'djcelery',
+    'kombu.transport.django',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -82,3 +84,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+SMS_GATEWAY_USERNAME = "assekalala"
+SMS_GATEWAY_API_KEY = "f604b0883906a94c0e957134125d377954fac3619047bf7a031b9b7714ae9b2b"
+
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'django://'
+
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'

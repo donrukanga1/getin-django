@@ -1,0 +1,9 @@
+---
+- hosts: server
+  sudo: true
+  roles:
+     - app
+     - nginx
+     - postgres
+     - uwsgi
+  vars_files: [vars.yml]

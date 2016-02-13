@@ -1,0 +1,33 @@
+---
+- apt: update_cache=yes cache_valid_time=3600
+- name: postgreql
+  apt: name={{ item }} state=present
+  with_items:
+    - postgresql
+    - postgresql-contrib
+    - pgadmin3
+    - python-psycopg2
+    - libpq-dev
+
+- postgresql_user: name={{name}} password={{secret}}
+  sudo_user: postgres
+
+- name: pg_hba.conf localhost md5
+  lineinfile: dest=/etc/postgresql/9.3/main/pg_hba.conf regexp="^local[\s]+all[\s]+all[\s]+[\w]+$" line="local    all             all                                     md5"
+  register: confchange
+
+- command: ./postgresql reload
+  when: confchange|changed
+  args:
+    chdir: /etc/init.d/
+
+- postgresql_db: name={{name}} owner={{name}} state=present
+  sudo_user: postgres
+
+- command: ./postgresql reload
+  when: confchange|changed
+  args:
+    chdir: /etc/init.d/
+
+- postgresql_db: name={{name}} owner={{name}} state=present
+  sudo_user: postgres

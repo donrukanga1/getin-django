@@ -1,0 +1,19 @@
+---
+- apt: update_cache=yes cache_valid_time=3600
+
+- name: Installing mysql
+  apt: name={{ item }} state=present
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb
+    - libmysqlclient-dev
+
+- name: Start Mysql Service
+  service: name=mysql state=started enabled=true
+
+- name: Ensure database present
+  mysql_db: name=remzak_beta state=present
+
+
+
