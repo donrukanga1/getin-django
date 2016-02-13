@@ -9,6 +9,7 @@ from dashboard.forms import UpdateGirlForm
 
 class GirlsList(LoginRequiredMixin, ListView):
     model = PregnantGirl
+    paginate_by = 20
     template_name = 'dashboard/list.html'
     context_object_name = 'girls'
 
