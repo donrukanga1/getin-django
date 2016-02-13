@@ -32,13 +32,13 @@
   copy: src=keys/id_rsa_app dest=/.ssh/priv_key mode=0600
 
 - name: checkout from bitbucket
-  git: repo=git@bitbucket.org:assekalala/getinug/getin-django.git dest=/srv/checkout/{{name}} key_file=/.ssh/priv_key accept_hostkey=true
+  git: repo=git@bitbucket.org:getinug/getin-django.git dest=/srv/checkout/{{name}} key_file=/.ssh/priv_key accept_hostkey=true
 
 - pip: requirements=/srv/checkout/{{name}}/requirements.txt virtualenv=/srv/checkout/{{name}}venv
 
-- command: /srv/checkout/{{name}}venv/bin/python manage.py syncdb --noinput
-  args:
-    chdir: /srv/checkout/{{name}}
+#- command: /srv/checkout/{{name}}venv/bin/python manage.py syncdb --noinput
+#  args:
+#    chdir: /srv/checkout/{{name}}
 
 - command: /srv/checkout/{{name}}venv/bin/python manage.py migrate
   args:
