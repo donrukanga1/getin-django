@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from views import GirlsList, GirlsMap, UpdateGirl, DeleteGirl
+from views import GirlsList, GirlsMap, UpdateGirl, DeleteGirl, PresetMessagesList, BlastSmsView
 
 urlpatterns = patterns(
     '',
@@ -10,6 +10,8 @@ urlpatterns = patterns(
     url(r'^girls/(?P<pk>[0-9]+)/edit$', UpdateGirl.as_view(), name='girls-edit'),
     url(r'^girls/(?P<pk>[0-9]+)/delete', DeleteGirl.as_view(), name='girls-delete'),
 
+    url(r'^messages/$', PresetMessagesList.as_view(), name='messages'),
+    url(r'^messages/blast/$', BlastSmsView.as_view(), name='blast-sms'),
 
 )
 
