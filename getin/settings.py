@@ -88,10 +88,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
-STATICFILES_DIRS = (
-    BASE_DIR + '/static/',
-)
+STATIC_ROOT = BASE_DIR + '/static/'
 
 
 SMS_GATEWAY_USERNAME = "assekalala"
@@ -102,3 +99,9 @@ djcelery.setup_loader()
 BROKER_URL = 'django://'
 
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+
+
+try:
+    from localsettings import *
+except ImportError, e:
+    pass
