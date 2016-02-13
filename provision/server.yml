@@ -4,6 +4,6 @@
   roles:
      - app
      - nginx
-#     - postgres
+     - mysql
      - uwsgi
   vars_files: [vars.yml]
