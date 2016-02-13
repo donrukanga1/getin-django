@@ -1,0 +1,80 @@
+{% extends 'dashboard/layout.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>Girls Map</h1>
+
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Girls</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <!--<div class="box-header">-->
+                  <!--<h3 class="box-title">Girls</h3>-->
+                <!--</div>&lt;!&ndash; /.box-header &ndash;&gt;-->
+                <div class="box-body">
+
+                    <div id="map" style="width: 100%; height: 600px;"></div>
+
+                      <script type="text/javascript">
+                        var locations = [
+                          {% for girl in girls %}
+                            ['{{ girl.name }}', {{ girl.latitude }}, {{ girl.longtitude }}, {{ girl.id }}],
+                          {% endfor %}
+
+                        ];
+
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                          zoom: 7,
+                          center: new google.maps.LatLng(0.3136, 32.581),
+                          mapTypeId: google.maps.MapTypeId.ROADMAP,
+                          styles: [	{		featureType:'water',		stylers:[{color:'#46bcec'},{visibility:'on'}]	},{		featureType:'landscape',		stylers:[{color:'#f2f2f2'}]	},{		featureType:'road',		stylers:[{saturation:-100},{lightness:45}]	},{		featureType:'road.highway',		stylers:[{visibility:'simplified'}]	},{		featureType:'road.arterial',		elementType:'labels.icon',		stylers:[{visibility:'off'}]	},{		featureType:'administrative',		elementType:'labels.text.fill',		stylers:[{color:'#444444'}]	},{		featureType:'transit',		stylers:[{visibility:'off'}]	},{		featureType:'poi',		stylers:[{visibility:'off'}]	}]
+                        });
+
+                        var infowindow = new google.maps.InfoWindow();
+
+                        var marker, i;
+
+                        for (i = 0; i < locations.length; i++) {
+                          marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                            map: map,
+                            icon: '{% static 'images/house.png' %}',
+                            shadow: pinShadow
+                                          });
+
+                          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                            return function() {
+                              infowindow.setContent(locations[i][0]);
+                              infowindow.open(map, marker);
+                            }
+                          })(marker, i));
+                        }
+                        var pinColor = "1bff00";
+                        var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+                            new google.maps.Size(21, 34),
+                            new google.maps.Point(0,0),
+                            new google.maps.Point(10, 34));
+                        var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+                            new google.maps.Size(40, 37),
+                            new google.maps.Point(0, 0),
+                            new google.maps.Point(12, 35));
+
+                      </script>
+
+
+</div>
+                </div>
+              </div>
+            </div>
+</section>
+{% endblock content %}

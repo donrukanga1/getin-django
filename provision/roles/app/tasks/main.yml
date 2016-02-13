@@ -1,18 +1,19 @@
 ---
+- apt: update_cache=yes cache_valid_time=3600
 - apt: name=git state=present update_cache=yes
 
 - apt: name={{ item }} state=present
   with_items:
     - python-pip
     - python-dev
-    - libtiff5-dev
+    - libtiff4
     - libjpeg8-dev
     - zlib1g-dev
     - libfreetype6-dev
     - liblcms2-dev
     - libwebp-dev
-    - tcl8.6-dev
-    - tk8.6-dev
+#    - tcl8.6
+#    - tk8.6-dev
     - python-tk
 
 - pip: name={{ item }}
@@ -31,7 +32,7 @@
   copy: src=keys/id_rsa_app dest=/.ssh/priv_key mode=0600
 
 - name: checkout from bitbucket
-  git: repo=git@bitbucket.org:assekalala/remzak-django.git dest=/srv/checkout/{{name}} key_file=/.ssh/priv_key accept_hostkey=true
+  git: repo=git@bitbucket.org:assekalala/getinug/getin-django.git dest=/srv/checkout/{{name}} key_file=/.ssh/priv_key accept_hostkey=true
 
 - pip: requirements=/srv/checkout/{{name}}/requirements.txt virtualenv=/srv/checkout/{{name}}venv
 

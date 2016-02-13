@@ -23,6 +23,9 @@ SECRET_KEY = '93kja$y+)bcj_b#e=ncf8h20y2@^(gsptz^2e30q2t_3r$m39@'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
+TEMPLATE_DIRS = (
+    "%s/templates" % BASE_DIR,
+)
 
 ALLOWED_HOSTS = []
 
@@ -40,6 +43,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'djcelery',
     'kombu.transport.django',
+    'bootstrapform',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -84,6 +88,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    BASE_DIR + '/static/',
+)
 
 
 SMS_GATEWAY_USERNAME = "assekalala"
