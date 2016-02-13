@@ -29,6 +29,7 @@
                         <th>Marital Status</th>
                         <th>Emergency Contact Name</th>
                         <th>Contact Number</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -41,6 +42,10 @@
                         <td>{{ girl.marital_status }}</td>
                         <td>{{ girl.emergency_contact }}</td>
                         <td>{{ girl.contact_number }}</td>
+                        <td>
+                            <a href="{% url 'girls-edit' girl.id %}"><i class="fa fa-edit"></i> Edit </a> |
+                            <a href="{% url 'girls-delete' girl.id %}"><i class="fa fa-trash"></i> Delete</a>
+                        </td>
                       </tr>
 
                     {% endfor %}

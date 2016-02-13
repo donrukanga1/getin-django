@@ -1,0 +1,21 @@
+{% extends "dashboard/layout.html" %}
+{% block content %}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="box box-primary">
+            {% load bootstrap %}
+            <form action="" method="post">
+                <div class="box box-body">
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+
+                    <div class="submit-row">
+                        <label>&nbsp;</label><input type="submit" class="btn btn-primary" value="Save"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
