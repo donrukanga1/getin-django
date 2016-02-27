@@ -54,6 +54,7 @@ class BlastSmsView(LoginRequiredMixin, FormView):
             else:
                 phone_number = girl.contact_number
 
-            utils.gateway.sendMessage(phone_number, form.data['text'])
+            sms = utils.gateway.sendMessage(phone_number, form.data['text'])
+            print sms
 
         return super(BlastSmsView, self).form_valid(form)
