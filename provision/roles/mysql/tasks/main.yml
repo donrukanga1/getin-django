@@ -13,7 +13,7 @@
   service: name=mysql state=started enabled=true
 
 - name: Ensure database present
-  mysql_db: name={{ name }}} state=present
+  mysql_db: name={{ name }} state=present
 
 
 
