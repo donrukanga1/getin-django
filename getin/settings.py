@@ -41,10 +41,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'backend',
     'rest_framework',
+    'rest_framework.authtoken',
     'djcelery',
     'kombu.transport.django',
     'bootstrapform',
 )
+
+AUTH_USER_MODEL = 'backend.User'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -99,6 +102,17 @@ djcelery.setup_loader()
 BROKER_URL = 'django://'
 
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+   'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+}
+
 
 
 try:
